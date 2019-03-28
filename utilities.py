@@ -34,13 +34,13 @@ def gridsearchcv(model, param_grid, train_X, train_Y, dev_X, dev_Y):
     from sklearn.metrics import accuracy_score
 
     model = GridSearchCV(model, param_grid=param_grid, scoring='accuracy',
-                        cv=KFold(n_splits=5, shuffle=True, random_state=None))
+                        cv=KFold(n_splits=5, shuffle=True, random_state=42))
     model.fit(train_X, train_Y)
     print('grid search best parameters:', model.best_params_)
     print('grid search best scores: {:.4f}'.format(model.best_score_))
 
     train_scores = cross_val_score(model, train_X, train_Y, scoring='accuracy',
-                                cv=KFold(n_splits=5, shuffle=True, random_state=None))
+                                cv=KFold(n_splits=5, shuffle=True, random_state=42))
     train_score = train_scores.mean()
     print('cv score: {:.4f}'.format(train_score))
 
